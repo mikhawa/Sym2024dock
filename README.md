@@ -104,3 +104,6 @@ Puis appel des fixtures :
 
     composer require orm-fixtures --dev
 
+    php bin/console make:fixture
+
+    php bin/console doctrine:fixtures:load
