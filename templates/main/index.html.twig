@@ -16,5 +16,9 @@
         <li>Your controller at <code>E:/SITES/2023-2024/Symfony/Sym2024dock/src/Controller/MainController.php</code></li>
         <li>Your template at <code>E:/SITES/2023-2024/Symfony/Sym2024dock/templates/main/index.html.twig</code></li>
     </ul>
+    {% for post in posts %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text }}</p>
+    {% endfor %}
 </div>
 {% endblock %}

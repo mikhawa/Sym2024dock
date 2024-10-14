@@ -14,9 +14,12 @@ class MainController extends AbstractController
     public function index(EntityManagerInterface $em): Response
     {
         $posts = $em->getRepository(Post::class)->findAll();
+        $lala ="youpie";
+
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
-            'post' => $posts
+            'lala' => $lala,
+            'posts' => $posts,
         ]);
     }
 }

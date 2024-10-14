@@ -11,6 +11,7 @@ services:
       - ./templates:/var/www/html/templates
       - ./migrations:/var/www/html/migrations
       - ./vendor:/var/www/html/vendor
+
     networks:
       - symfony-network
 
