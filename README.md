@@ -97,3 +97,10 @@ server {
     docker-compose up -d
 
     docker-compose down
+
+Création de Post
+
+Puis appel des fixtures :
+
+    composer require orm-fixtures --dev
+
