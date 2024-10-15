@@ -41,14 +41,6 @@ services:
     networks:
       - symfony-network
 
-  composer:
-    image: composer:latest
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
-    networks:
-      - symfony-network
-
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:

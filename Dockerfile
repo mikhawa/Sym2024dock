@@ -3,6 +3,9 @@ FROM php:8.2-fpm
 # Installer les extensions PDO et MySQL
 RUN docker-php-ext-install pdo pdo_mysql
 
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Installer APCu
 RUN pecl install apcu && docker-php-ext-enable apcu
 
@@ -25,5 +28,3 @@ RUN docker-php-ext-install opcache \
     && echo "opcache.revalidate_freq=0" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

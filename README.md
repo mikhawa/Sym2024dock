@@ -43,6 +43,8 @@ RUN docker-php-ext-install opcache \
     && echo "opcache.revalidate_freq=0" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/opcache.ini
 
+
+
 ```
 
 Après avoir viré les autres fichiers docker, création du fichier
@@ -89,14 +91,6 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-    networks:
-      - symfony-network
-
-  composer:
-    image: composer:latest
-    working_dir: /var/www/html
-    volumes:
-      - ./:/var/www/html
     networks:
       - symfony-network
 
