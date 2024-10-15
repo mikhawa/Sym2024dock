@@ -60,14 +60,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ./:/var/www/html/
-      - ./var:/var/www/html/var
-      - ./public:/var/www/html/public
-      - ./src:/var/www/html/src
-      - ./config:/var/www/html/config
-      - ./templates:/var/www/html/templates
-      - ./migrations:/var/www/html/migrations
-      - ./vendor:/var/www/html/vendor
+      - ./:/var/www/html
 
     networks:
       - symfony-network
@@ -75,12 +68,14 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./public:/public
+      - ./:/var/www/html
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "8080:80"
     networks:
       - symfony-network
+    depends_on:
+      - php
 
   mysql:
     image: mysql:8.0
@@ -112,6 +107,7 @@ volumes:
 
 networks:
   symfony-network:
+
 
 
 ```
