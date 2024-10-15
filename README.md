@@ -18,6 +18,9 @@ FROM php:8.2-fpm
 # Installer les extensions PDO et MySQL
 RUN docker-php-ext-install pdo pdo_mysql
 
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Installer APCu
 RUN pecl install apcu && docker-php-ext-enable apcu
 
@@ -89,6 +92,14 @@ services:
     networks:
       - symfony-network
 
+  composer:
+    image: composer:latest
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - symfony-network
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     environment:
@@ -105,6 +116,7 @@ volumes:
 
 networks:
   symfony-network:
+
 
 ```
 
@@ -145,13 +157,30 @@ server {
 
     docker-compose exec php bash
 
+Par exemple pour installer les dépendances :
 
-Création de Post
+    composer install
+
+Pour quitter le container :
+
+    exit
+
+## Création de Post
+    
+        php bin/console make:entity Post
+    
+        php bin/console make:migration
+    
+        php bin/console doctrine:migrations:migrate
 
 Puis appel des fixtures :
+
+    docker-compose exec php bash
 
     composer require orm-fixtures --dev
 
     php bin/console make:fixture
 
     php bin/console doctrine:fixtures:load
+
+    exit

@@ -24,3 +24,6 @@ RUN docker-php-ext-install opcache \
     && echo "opcache.max_accelerated_files=10000" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.revalidate_freq=0" >> /usr/local/etc/php/conf.d/opcache.ini \
     && echo "opcache.validate_timestamps=1" >> /usr/local/etc/php/conf.d/opcache.ini
+
+# Installer Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
